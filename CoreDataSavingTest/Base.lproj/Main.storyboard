@@ -46,6 +46,14 @@
                                     <action selector="saveButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u4u-CV-fmN"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gew-C8-p7Z">
+                                <rect key="frame" x="137" y="585" width="101" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Delete &amp; Show"/>
+                                <connections>
+                                    <action selector="deleteButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ShR-2q-fec"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.86606824830079987" green="0.93359795670237311" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

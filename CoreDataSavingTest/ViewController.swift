@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var showDataTextField: UITextView!
     
     
+    var stringVar: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -26,6 +28,11 @@ class ViewController: UIViewController {
         
         retrieveData()
         
+    }
+    
+    
+    @IBAction func deleteButtonTapped(_ sender: Any) {
+        deleteData()
     }
     
     func saveData(){
@@ -62,7 +69,9 @@ class ViewController: UIViewController {
         
         do{
             let result = try managedContext.fetch(fetchRequest)
-            var stringVar: String = ""
+            stringVar = ""
+            
+            print(result)
             
             for data in result as! [NSManagedObject] {
                 print(data.value(forKey: "name") as! String)
@@ -76,5 +85,42 @@ class ViewController: UIViewController {
             print("Fail!")
         }
     }
+    
+    func deleteData(){
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Profile")
+        
+        let deleteText = nameTextField.text
+        
+        fetchRequest.predicate = NSPredicate(format: "name = %@", deleteText!)
+        
+        do{
+            let test = try managedContext.fetch(fetchRequest)
+            
+            for i in test{
+                let objectToDelete = i as! NSManagedObject
+                managedContext.delete(objectToDelete)
+            }
+            
+            do{
+                try managedContext.save()
+            }
+            catch{
+                print(error)
+            }
+        } catch{
+            print(error)
+        }
+        retrieveData()
+    }
+    
+//    func deleteDuplicateData(){
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Profile")
+//
+//        var resultsArr
+//    }
 }
 
